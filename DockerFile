@@ -4,12 +4,11 @@ FROM eclipse-temurin:17-jre-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the fat jar from the build directory into the container at /app
-COPY build/libs/*-all.jar app.jar
+# Correctly copy the fat jar and rename it to app.jar inside the container
+COPY server/build/libs/server-all.jar app.jar
 
 # Make port 8080 available to the world outside this container
-# Render will automatically map its internal port to this one.
 EXPOSE 8080
 
-# Run the jar file
+# Run the single jar file we copied
 CMD ["java", "-jar", "app.jar"]
